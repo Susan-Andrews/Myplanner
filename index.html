@@ -11,31 +11,18 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 </head>
 <body >
-    <div id="dark-theme">
+    <div id="header">
     <main class="container py-5 p-md-5 position-relative ">
-        <!-- Dark Mode Switcher -->
-        <!-- <div class="dark-mode d-flex align-items-center ">
-            <p class="m-0 me-2">Dark Mode</p>
-            
-                <i class="bi bi-brightness-high-fill"></i>
-                <span></span>
-                <i class="bi bi-moon-stars-fill"></i>
-            
-        </div> -->
         
-        <div id='mode'>
-            <img class="position-relative top-0 start-100" src="src/moon.png" id='icon'>
-        </div>
+        <img class="position-relative top-0 start-100" src="src/moon.png" id='icon'>
 
-
-        <h1 class="text-center my-4">Notes Keeper</h1>
+        <h1 class="text-center my-4">To Do List</h1>
 
         <fieldset class="border border-1 p-3">
-            <legend class="text-center text-decoration-underline">Add New Note</legend>
             <form class="fw-semibold fs-5">
                 <div class="my-3">
                     <label for="title" class="form-label">Title</label>
-                    <input type="text" id="title" class="form-control fs-5" placeholder="eg: Schedule A Meeting" required>
+                    <input type="text" id="title" class="form-control fs-5" placeholder="eg: Complete notes" required>
                 </div>
     
                 <div>
@@ -44,22 +31,24 @@
                 </div>
     
                 <div>
-                    <span class="fs-6 text-secondary">*Hint: Use // to insert new lines.</span>
+                    <span class="fs-6 text-secondary">Use // to insert new lines.</span>
                 </div>
     
-                <div class="d-md-flex align-items-center my-3">
-                    <p class="me-3 mb-0">Select Note Color: </p>
+                <div  id="colour-selection " class=" align-self-end  d-inline-flex ">
+                    <p class="me-3 mb-0 ">Select Daily,Weekly,Monthly,Yearly : </p>
                     <div>
-                        <input type="radio" id="cyan" class="form-check-input me-3" name="bg-color" value="#1C8BF2">
-                        <input type="radio" id="orange" class="form-check-input me-3" name="bg-color" value="#EE5E44">
-                        <input type="radio" id="green" class="form-check-input me-3" name="bg-color" value="#2EAD0B" checked>
-                        <input type="radio" id="purple" class="form-check-input me-3" name="bg-color" value="#740BAD">
+                        
+                        <input type="radio" id="blue" class="form-check-input me-3" name="bg-color" value="#4E6E81">
+                        <input type="radio" id="pale" class="form-check-input me-3" name="bg-color" value="#B4E4FF">
+                        <input type="radio" id="green" class="form-check-input me-3" name="bg-color" value="#40826D" checked>
+                        <input type="radio" id="maroon" class="form-check-input me-3" name="bg-color" value="#A7727D">
                     </div>
                 </div>
     
-                <div class="my-3">
-                    <button type="button" id="add" class="btn btn-lg btn-primary px-5">Add</button>
-                    <input type="reset" class="btn btn-lg btn-danger px-5" value="Reset">
+                <div class="d-flex justify-content-center my-3">
+                    <button type="button" id="add" class="  badge text-bg-primary">Add</button>
+                    
+                   
                 </div>
             </form>
 
@@ -67,7 +56,7 @@
 
         <!-- Notes Container -->
         <hr>
-        <h2 class="text-center">All Notes</h2>
+        <h2 class="text-center">Your To Do's!</h2>
         <section>
 
         </section>

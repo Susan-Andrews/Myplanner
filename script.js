@@ -13,7 +13,7 @@ taskTitle.classList.add("fs-4", "fst-italic");
 
 // Task Button
 let removeTask = document.createElement("button");
-removeTask.classList.add("btn", "btn-danger", "rounded-0", "discard-task");
+removeTask.classList.add("btn", "btn-light", "rounded-0", "discard-task");
 removeTask.textContent = "Remove";
 
 // Task Divider
@@ -89,25 +89,21 @@ addEventListener("click", function (evt) {
   }
 });
 
-// Switch To Dark Mode
-// document.querySelector(".dark-mode-switcher").onclick = function () {
-//   this.classList.toggle("active");
-
-//   document.body.classList.toggle("night-mode");
-// };
 
 var icon=document.getElementById('icon');
 icon.onclick=function(){
     document.body.classList.toggle("dark-theme");
     if(document.body.classList.contains("dark-theme")){
-        icon.src="src/sunwhite.png";
-        document.getElementById("dark-theme").style.backgroundColor="white";
-        document.getElementById("dark-theme").style.color = "black";
+    
+      icon.src="src/sunn.png";
+
+
     }
     else{
+    
         icon.src="src/moon.png";
-        document.getElementById("dark-theme").style.backgroundColor="black";
-        document.getElementById("dark-theme").style.color = "white";
+     
+        
     }
 
 
