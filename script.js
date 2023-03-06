@@ -101,9 +101,13 @@ icon.onclick=function(){
     document.body.classList.toggle("dark-theme");
     if(document.body.classList.contains("dark-theme")){
         icon.src="src/sunwhite.png";
+        document.getElementById("dark-theme").style.backgroundColor="white";
+        document.getElementById("dark-theme").style.color = "black";
     }
     else{
         icon.src="src/moon.png";
+        document.getElementById("dark-theme").style.backgroundColor="black";
+        document.getElementById("dark-theme").style.color = "white";
     }
 
 
