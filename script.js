@@ -1,110 +1,125 @@
-// Task Box
-let taskBox = document.createElement("div");
 
-taskBox.classList.add("p-3", "my-3", "text-white");
-
-// Task Header
-let taskHeader = document.createElement("div");
-taskHeader.classList.add("box-header", "d-flex", "justify-content-between");
-
-// Task Title
-let taskTitle = document.createElement("h5");
-taskTitle.classList.add("fs-4", "fst-italic");
-
-// Task Button
-let removeTask = document.createElement("button");
-removeTask.classList.add("btn", "btn-light", "rounded-0", "discard-task");
-removeTask.textContent = "Remove";
-
-// Task Divider
-let taskDivider = document.createElement("hr");
-
-// Task Description
-let taskDescription = document.createElement("p");
-taskDescription.classList.add("fs-5");
-
-// Task Header Element Fusion
-taskHeader.appendChild(taskTitle);
-taskHeader.appendChild(removeTask);
-
-// Task Box Element Fusion
-taskBox.appendChild(taskHeader);
-taskBox.appendChild(taskDivider);
-taskBox.appendChild(taskDescription);
-
-console.log(taskBox);
-
-var x = 1;
-
-// Get Task Infos
-let taskName = document.getElementById("title");
-let taskDetails = document.getElementById("description");
-
-document.getElementById("add").onclick = function () {
-  // Generate Note Backgound Color
-  let colorScheme = document.querySelectorAll("input[type='radio']");
-  var color = "#000";
-  var flag = false;
-
-  colorScheme.forEach(function (ele) {
-    if (ele.checked) {
-      color = ele.value;
-      flag = true;
-    }
-  });
-
-  if (taskName.value.trim() != "" && taskDetails.value.trim() != "" && flag) {
-    let taskPrototype = taskBox.cloneNode(true);
-    taskPrototype.querySelector("h5").textContent = taskName.value.trim();
-
-    //? Making The Ability To Insert Line Breaks Without Using innerHTML Method
-    let taskDetailsStyled = taskDetails.value.split("//");
-
-    for (let i = 0; i < taskDetailsStyled.length; i++) {
-      taskPrototype
-        .querySelector("p")
-        .appendChild(document.createTextNode(taskDetailsStyled[i]));
-      taskPrototype
-        .querySelector("p")
-        .appendChild(document.createElement("br"));
-    }
-
-    // Clear Input Fields When Creating The Note
-    taskName.value = "";
-    taskDetails.value = "";
-
-    //! taskPrototype.className = `task-${x}` will override all classes values
-
-    taskPrototype.classList.add(`task-${x}`);
-    taskPrototype.style.setProperty("background-color", color);
-
-    document.querySelector("section").appendChild(taskPrototype);
-    x++;
-  }
-};
-
-addEventListener("click", function (evt) {
-  if (evt.target.classList.contains("discard-task")) {
-    evt.target.parentElement.parentElement.remove();
-  }
-});
-
-
+//Dark theme 
 var icon=document.getElementById('icon');
 icon.onclick=function(){
     document.body.classList.toggle("dark-theme");
     if(document.body.classList.contains("dark-theme")){
-    
       icon.src="src/sunn.png";
-
-
     }
     else{
-    
-        icon.src="src/moon.png";
-     
-        
+        icon.src="src/moon.png";   
     }
-
-
 } 
+//On app load ,gets all the tasks from local storage
+window.onload=loadtasks;
+//On form submit,adds task
+document.querySelector("form").addEventListener("submit", e => {
+  e.preventDefault();
+  addtask();
+});
+//function -loading the task
+function loadtasks(){
+  if (localStorage.getItem("tasks") == null) return;
+  let tasks=Array.from(JSON.parse(localStorage.getItem("tasks")));
+  tasks.forEach(task => {
+    const list=document.querySelector("ul");
+    const li=document.createElement("li");
+    li.innerHTML= `<div  id="mytodo" class=" col-sm gap-auto p-7">
+    <input type="checkbox" onclick=taskcomplete(this)" class="check"  ${task.completed ? "checked" : ""}>
+    <input type="text" size="90" value="${task.task}" class="task ${task.completed ? "completed" : "" } " onfocus=getcurrenttask(this) " onblur="edittask(this)">
+    <i class=fa fa-trash" onclick=removetask(this)"></li></div> `;
+    list.insertBefore(li,list.children[0]);  
+  });
+}
+//function-adding new task
+function addtask() {
+  const task=document.querySelector("form input");
+  const list=document.querySelector("ul");
+  
+  if(task.value === "") {
+    alert("Please add some task!");
+    return false;
+  }
+    // task already exist
+  if (document.querySelector(`input[value="${task.value}"]`)) {
+    alert("Task already exist!");
+    return false;
+  }
+  localStorage.setItem("tasks" , JSON.stringify([...JSON.parse(localStorage.getItem("tasks") || "[]") , {task:task.value ,completed:false}]));
+
+  const li=document.createElement("li");
+  li.innerHTML = `<div id="mytodo" class=" col-sm gap-auto p-7"><input type="checkbox" onclick="taskcomplete(this)" class="check">
+      <input type="text" size="90" value="${task.value}" class="task" onfocus="getcurrenttask(this)" onblur="edittask(this)">
+      <i class="fa fa-trash" onclick="removetask(this)"></i> </div>`;
+  list.insertBefore(li,list.children[0]);
+  task.value="";    
+}
+//function-completed task
+function taskcomplete(event) {
+  let tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
+  tasks.forEach(task => {
+    if (task.task === event.nextElementSibling.value) {
+      task.completed = !task.completed;
+    }
+  });
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  event.nextElementSibling.classList.toggle("completed");
+}
+//function-removing the task
+function removetask(event) {
+  let tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
+  tasks.forEach(task => {
+    if (task.task === event.parentNode.children[1].value) {
+      // delete task
+      tasks.splice(tasks.indexOf(task), 1);
+    }
+  });
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  event.parentElement.remove();
+}
+
+var currenttask=null;
+//function-retrieving the task
+function getcurrenttask(event) {
+  currenttask=event.value
+}
+//function-editing a task
+function edittask(event){
+  let tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
+  if (event.value === "") {
+    alert("Task is empty!");
+    event.value = currenttask;
+    return;
+  }
+  // task already exist
+  tasks.forEach(task => {
+    if (task.task === event.value) {
+      alert("Task already exist!");
+      event.value = currenttask;
+      return;
+    }
+  });
+  // update task
+  tasks.forEach(task => {
+    if (task.task === currenttask) {
+      task.task = event.value;
+    }
+  });
+  // update local storage
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+
+}
+
+window.jsPDF = window.jspdf.jsPDF;
+jQuery(document).ready(function() {
+  $('#download-btn').click(function(){
+    html2canvas(document.querySelector('#mytodo')).then((canvas) => {
+      let img=canvas.toDataURL('image/png');
+      // console.log(img);
+
+      let pdf=new jsPDF('p', 'px' , [1600,1131]);
+      pdf.addImage(img,'PNG',15,15,864,38);
+      pdf.save("name.pdf");
+    });
+  });
+});

@@ -13,44 +13,61 @@
     background-color: var(--background-color);
     transition: all 500ms ease-out;
     color:var(--text-color);
- 
-
 }
 #icon{
    
    cursor: pointer;
    width: 30px;
 } 
-#add{
+#add , #download-btn{
     border: none;
-    align-items: center;
-    justify-content: center;
-    
+    background-color: #40826D !important;
+}
+ul{
+    list-style:none;
+    color:  #40826D;
+    padding: 0;
+    width: 100%;
+    height: auto;
 }
 
-input[type="radio"] {
-    height: 20px;
-    width: 20px;
-}
-
-#blue {
-    background-color: #4E6E81;
-}
-
-#pale {
-    background-color: #B4E4FF;
-}
-
-#green {
+li{
+    padding: 10px;
+    float: left;
     background-color: #40826D;
+    width: 100%;
+    height: auto;
+    margin: auto;
 }
-
-#maroon {
-    background-color: #A7727D;
+i{
+    float: right;
+    color: white;
+    gap: 6px;
 }
+.check {
+    width: 0.8em;
+    height: 0.8em;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: white;
+    border: 1px solid rgb(255, 255, 255);
+    appearance: none;
+  }
+  .check:checked + .task {
+    text-decoration: line-through;
+  }
+  i:hover {
+    color: rgb(255, 82, 82);
+  }
+  .completed{
+    color: rgb(255, 82, 82);
+    text-decoration: line-through;
+  }
+  .task{
+    width: fit-content;
+    height: auto;
+    padding: 5px;
+    margin: auto;
+  }
 
-
-fieldset {
-    overflow: hidden;
-    position: relative;
-}
+ 
