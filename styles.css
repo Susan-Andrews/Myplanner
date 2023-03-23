@@ -1,3 +1,6 @@
+*{
+  font-size: 1vw;;
+}
 :root{
     --background-color:#fff;
     --text-color:#000;
@@ -8,7 +11,9 @@
     --text-color:#fff;
     --title-color:#fff;
 }
-
+/* section{
+  height:80vh;
+} */
 #header {
     background-color: var(--background-color);
     transition: all 500ms ease-out;
@@ -54,6 +59,8 @@ i{
     appearance: none;
   }
   .check:checked + .task {
+    color: rgb(255, 82, 82);
+
     text-decoration: line-through;
   }
   i:hover {
@@ -70,4 +77,13 @@ i{
     margin: auto;
   }
 
- 
+ @media print{
+  body*:not(#mytodo):not(#mytodo *){
+    visibility: hidden;
+  }
+  #mytodo{
+    position: absolute;
+    top:0;
+    left:0;
+  }
+ }

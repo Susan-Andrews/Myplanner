@@ -15,35 +15,38 @@
 </head>
 <body id="header">
     <main class="container py-5 p-md-5 position-relative ">
-        <img class="position-relative top-0 start-100" src="src/moon.png" id='icon'>
-        <h1 class="text-center my-4">To Do List</h1>
-  
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-        <!-- jspdf -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-        <!-- html2canvas -->
-        <script src="//cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-        <!-- icons -->
-        <link rel="icon" type="image/x-icon" href="src/favicon.ico" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <section id="intro">
+            <img class="position-relative top-0 start-100" src="src/moon.png" id='icon'>
+            <h1 class="text-center my-4">To Do List</h1>
+    
+            <!-- Bootstrap CSS -->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+            <!-- jspdf -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+            <!-- html2canvas -->
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+            <!-- icons -->
+            <link rel="icon" type="image/x-icon" href="src/favicon.ico" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-        <form class="fw-semibold fs-5" id="contents">
-            <div class=" d-flex flex-row  p-5 gap-3 my-3">
-                <!-- input task -->
-                <input type="text" id="title"  class="form-control fs-5" placeholder="Add task" required>
-                <!-- add button -->
-                <button type="submit" id="add" class="badge text-bg-primary">Add</button> 
-                <button id="download-btn" class=" badge text-bg-primary">Download your planner</button>
-            </div>  
-        </form>  
-        <div>
-            <div id="mytodo">   
+            <form class="fw-semibold fs-5" id="contents">
+                <div class=" d-flex flex-row  p-5 gap-3 my-3">
+                    <!-- input task -->
+                    <input type="text" id="title"  class="form-control fs-5" placeholder="Add task" required>
+                    <!-- add button -->
+                    <button type="submit" id="add" class="badge text-bg-primary">Add</button> 
+                    <button id="download-btn"  class=" badge text-bg-primary" onclick="window.print()">Download your planner</button>
+                </div>  
+            </form>  
+        </section>
+        <section  id="mytodo">
+            <div>   
                 <h2 class="text-center " >Your To Do's!</h2>
                 
-                    <ul ></ul>
+                <ul ></ul>
+                <p class="text-center " >Copyright @annu</p>
             </div>  
-    </div>
+        </section>
     </main>
    
 </body>
