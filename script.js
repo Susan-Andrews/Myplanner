@@ -127,7 +127,15 @@ jQuery(document).ready(function() {
 });
 
 
-function deleteall() {
+// function deleteall() {
+//   localStorage.clear();
+// }
+
+function deleteall(elementID) {
+  var div = document.getElementById(elementID);
+    
+  while(div.firstChild) {
+      div.removeChild(div.firstChild);
+  }
   localStorage.clear();
-  
 }
