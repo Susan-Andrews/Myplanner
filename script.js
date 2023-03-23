@@ -52,8 +52,8 @@ function addtask() {
   li.innerHTML = `<div id="mytodo" class=" col-sm gap-auto p-7"><input type="checkbox" onclick="taskcomplete(this)" class="check">
       <input type="text" size="90" value="${task.value}" class="task" onfocus="getcurrenttask(this)" onblur="edittask(this)">
       <i class="fa fa-trash" onclick="removetask(this)"></i> </div>`;
-  list.insertBefore(li,list.children[0]);
   task.value="";    
+  list.insertBefore(li,list.children[0]);
 }
 //function-completed task
 function taskcomplete(event) {
