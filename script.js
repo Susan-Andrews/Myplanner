@@ -24,10 +24,10 @@ function loadtasks(){
   tasks.forEach(task => {
     const list=document.querySelector("ul");
     const li=document.createElement("li");
-    li.innerHTML= `<section  id="mytodo" class=" col-sm gap-auto p-7">
+    li.innerHTML= `<div  id="mytodo" class=" col-sm gap-auto p-7">
     <input type="checkbox" onclick=taskcomplete(this)" class="check"  ${task.completed ? "checked" : ""}>
     <input type="text" size="90" value="${task.task}" class="task ${task.completed ? "completed" : "" } " onfocus=getcurrenttask(this) " onblur="edittask(this)">
-    <i class=fa fa-trash" onclick=removetask(this)"></li></section> `;
+    <i class=fa fa-trash" onclick=removetask(this)"></li></div> `;
     list.insertBefore(li,list.children[0]);  
     
   });
@@ -49,9 +49,9 @@ function addtask() {
   localStorage.setItem("tasks" , JSON.stringify([...JSON.parse(localStorage.getItem("tasks") || "[]") , {task:task.value ,completed:false}]));
 
   const li=document.createElement("li");
-  li.innerHTML = `<section id="mytodo" class=" col-sm gap-auto p-7"><input type="checkbox" onclick="taskcomplete(this)" class="check">
+  li.innerHTML = `<div id="mytodo" class=" col-sm gap-auto p-7"><input type="checkbox" onclick="taskcomplete(this)" class="check">
       <input type="text" size="90" value="${task.value}" class="task" onfocus="getcurrenttask(this)" onblur="edittask(this)">
-      <i class="fa fa-trash" onclick="removetask(this)"></i> </section>`;
+      <i class="fa fa-trash" onclick="removetask(this)"></i> </div>`;
   list.insertBefore(li,list.children[0]);
   task.value="";    
 }
@@ -120,8 +120,14 @@ jQuery(document).ready(function() {
       // console.log(img);
 
       let pdf=new jsPDF('p', 'px' , [1600,1131]);
-      pdf.addImage(img,'PNG',15,15,650,1200);
+      pdf.addImage(img,'PNG',20,20,690,550);
       pdf.save("planner.pdf");
     });
   });
 });
+
+
+function deleteall() {
+  localStorage.clear();
+  
+}

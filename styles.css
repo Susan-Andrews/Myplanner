@@ -11,9 +11,9 @@
     --text-color:#fff;
     --title-color:#fff;
 }
-/* section{
+ section{
   height:80vh;
-} */
+} 
 #header {
     background-color: var(--background-color);
     transition: all 500ms ease-out;
@@ -24,7 +24,7 @@
    cursor: pointer;
    width: 30px;
 } 
-#add , #download-btn{
+#add , #download-btn , #delete-all{
     border: none;
     background-color: #40826D !important;
 }
@@ -86,4 +86,8 @@ i{
     top:0;
     left:0;
   }
+ }
+
+ p{
+  color: transparent;
  }

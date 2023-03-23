@@ -15,7 +15,7 @@
 </head>
 <body id="header">
     <main class="container py-5 p-md-5 position-relative ">
-        <section id="intro">
+        
             <img class="position-relative top-0 start-100" src="src/moon.png" id='icon'>
             <h1 class="text-center my-4">To Do List</h1>
     
@@ -36,16 +36,23 @@
                     <!-- add button -->
                     <button type="submit" id="add" class="badge text-bg-primary">Add</button> 
                     <button id="download-btn"  class=" badge text-bg-primary" onclick="window.print()">Download your planner</button>
+                    <button type="submit" id="delete-all" class=" badge text-bg-primary " onclick="deleteall()">Delete all</button> 
+                
                 </div>  
             </form>  
-        </section>
-        <section  id="mytodo">
-            <div>   
-                <h2 class="text-center " >Your To Do's!</h2>
-                
-                <ul ></ul>
-                <p class="text-center " >Copyright @annu</p>
-            </div>  
+        
+        <section >
+            <div id="contentvp">
+                <div  id="mytodo">   
+                    <h2 class="text-center " >Your To Do's!</h2>
+                    
+                    <ul ></ul>
+                    <footer>
+                    <p class="text-center p-5" >-</p>
+                </footer>
+                </div>
+               
+            </div>      
         </section>
     </main>
    
