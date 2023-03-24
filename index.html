@@ -35,25 +35,27 @@
                     <input type="text" id="title"  class="form-control fs-5" placeholder="Add task" required>
                     <!-- add button -->
                     <button type="submit" id="add" class="badge text-bg-primary">Add</button> 
+                    <!-- download button -->
                     <button id="download-btn"  class=" badge text-bg-primary" onclick="window.print()">Download your planner</button>
-                    <button type="submit" id="delete-all" class=" badge text-bg-primary " onclick="deleteall('contentvp')">Delete all</button> 
+                    <!-- submit button -->
+                    <button type="submit" id="delete-all" class=" badge text-bg-primary " onclick="deleteall('delcontent')">Delete all</button> 
                 
                 </div>  
             </form>  
         
-        <section >
-            <div id="contentvp">
-                <div  id="mytodo">   
-                    <h2 class="text-center " >Your To Do's!</h2>
-                    
-                    <ul ></ul>
-                    <footer>
-                    <p class="text-center p-5" >-</p>
-                </footer>
-                </div>
-               
-            </div>      
-        </section>
+            <section >
+                <div id="contentvp">
+                    <div id="mytodo">
+                        <h2 class="text-center " >Your To Do's!</h2>
+                            <div id="delcontent">
+                                    <ul ></ul>
+                                    <footer>
+                                    <p class="text-center p-5" >-</p>
+                                    </footer>
+                            </div>
+                    </div>
+                </div>      
+            </section>
     </main>
    
 </body>

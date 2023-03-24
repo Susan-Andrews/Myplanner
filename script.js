@@ -10,6 +10,7 @@ icon.onclick=function(){
         icon.src="src/moon.png";   
     }
 } 
+
 //On app load ,gets all the tasks from local storage
 window.onload=loadtasks;
 //On form submit,adds task
@@ -17,6 +18,7 @@ document.querySelector("form").addEventListener("submit", e => {
   e.preventDefault();
   addtask();
 });
+
 //function -loading the task
 function loadtasks(){
   if (localStorage.getItem("tasks") == null) return;
@@ -32,29 +34,32 @@ function loadtasks(){
     
   });
 }
+
 //function-adding new task
 function addtask() {
-  const task=document.querySelector("form input");
-  const list=document.querySelector("ul");
-  
+  let task=document.querySelector("form input");
+  let list=document.querySelector("ul");
+  let content=document.querySelector("delcontent")
   if(task.value === "") {
     alert("Please add some task!");
     return false;
   }
-    // task already exist
+  // task already exist
   if (document.querySelector(`input[value="${task.value}"]`)) {
     alert("Task already exist!");
     return false;
   }
   localStorage.setItem("tasks" , JSON.stringify([...JSON.parse(localStorage.getItem("tasks") || "[]") , {task:task.value ,completed:false}]));
 
-  const li=document.createElement("li");
+  let li=document.createElement("li");
   li.innerHTML = `<div id="mytodo" class=" col-sm gap-auto p-7"><input type="checkbox" onclick="taskcomplete(this)" class="check">
       <input type="text" size="90" value="${task.value}" class="task" onfocus="getcurrenttask(this)" onblur="edittask(this)">
       <i class="fa fa-trash" onclick="removetask(this)"></i> </div>`;
-  task.value="";    
   list.insertBefore(li,list.children[0]);
+  task.value="" 
+  
 }
+
 //function-completed task
 function taskcomplete(event) {
   let tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
@@ -66,6 +71,7 @@ function taskcomplete(event) {
   localStorage.setItem("tasks", JSON.stringify(tasks));
   event.nextElementSibling.classList.toggle("completed");
 }
+
 //function-removing the task
 function removetask(event) {
   let tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
@@ -84,6 +90,7 @@ var currenttask=null;
 function getcurrenttask(event) {
   currenttask=event.value
 }
+
 //function-editing a task
 function edittask(event){
   let tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
@@ -127,15 +134,13 @@ jQuery(document).ready(function() {
 });
 
 
-// function deleteall() {
-//   localStorage.clear();
-// }
-
+//function to delete all the todos
 function deleteall(elementID) {
+  localStorage.clear();
   var div = document.getElementById(elementID);
     
   while(div.firstChild) {
       div.removeChild(div.firstChild);
   }
-  localStorage.clear();
+  
 }
