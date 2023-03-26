@@ -12,7 +12,7 @@ icon.onclick=function(){
 } 
 
 //On app load ,gets all the tasks from local storage
-window.onload=loadtasks;
+window.onload=loadtasks();
 //On form submit,adds task
 document.querySelector("form").addEventListener("submit", e => {
   e.preventDefault();
@@ -34,7 +34,7 @@ function loadtasks(){
     
   });
 }
-
+let list=document.querySelector("ul");
 //function-adding new task
 function addtask() {
   let task=document.querySelector("form input");

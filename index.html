@@ -30,16 +30,24 @@
 
             <form class="fw-semibold fs-5" id="contents">
                 <div class=" d-flex flex-row  p-5 gap-3 my-3">
-                    <!-- input task -->
-                    <input type="text" id="title"  class="form-control fs-5" placeholder="Add task" required>
-                    <!-- add button -->
-                    <button type="submit" id="add" class="badge text-bg-primary">Add</button> 
-                    <!-- download button -->
-                    <button id="download-btn"  class=" badge text-bg-primary" onclick="window.print()">Download your planner</button>
-                    <!-- submit button -->
-                    <button type="submit" id="delete-all" class=" badge text-bg-primary " onclick="deleteall('delcontent')">Delete all</button> 
-                
+                        <!-- input task -->
+                        <div class="col">
+                            <input type="text" id="title"  class="form-control" placeholder="Add task"  required>
+                        </div>
+                        <!-- add button -->
+                        <div class="btn-group">
+                            <button type="submit"  id="add" class="badge text-bg-primary">Add Task</button>
+                        </div>
+                        <!-- download button -->
+                        <div class="btn-group">
+                            <button type="button"  id="download-btn" class="badge text-bg-primary" onclick="window.print()">Download Planner</button>
+                        </div>
+                        <!-- submit button -->
+                        <div class="btn-group">
+                            <button type="submit"  id="delete-all"  class="badge text-bg-primary" onclick="deleteall('delcontent')"> Delete All</button>
+                        </div>
                 </div>  
+                
             </form>  
         
             <section >
@@ -48,13 +56,18 @@
                         <h2 class="text-center " >Your To Do's!</h2>
                             <div id="delcontent">
                                     <ul ></ul>
-                                    <footer>
-                                    <p class="text-center p-5" >-</p>
-                                    </footer>
+                                    <div>
+                                    <p class="text-center" >-</p>
+                                    </div>
                             </div>
                     </div>
                 </div>      
             </section>
+            <footer>
+            <div class="text-center"> 
+                <p2 >@annu23</p2>
+            </div>
+            </footer>
             
 
     </main>

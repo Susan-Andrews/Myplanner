@@ -1,15 +1,18 @@
 *{
-  font-size: 1vw;;
+  font-size: 1vw;
+  box-sizing: border-box;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  
 }
 :root{
-    --background-color:#fff;
-    --text-color:#000;
-    --title-color:#000;
+    --background-color:#E8F1F5;
+    --text-color:#181823;
+    --title-color:#181823;
 }
 .dark-theme{
-    --background-color:#000;
-    --text-color:#fff;
-    --title-color:#fff;
+    --background-color:#181823;
+    --text-color:#E8F1F5;
+    --title-color:#E8F1F5;
 }
  section{
   height:80vh;
@@ -46,7 +49,7 @@ li{
 }
 i{
     float: right;
-    color: white;
+    color: #E8F1F5;
     gap: 6px;
 }
 .check {
@@ -54,8 +57,8 @@ i{
     height: 0.8em;
     cursor: pointer;
     border-radius: 50%;
-    background-color: white;
-    border: 1px solid rgb(255, 255, 255);
+    background-color: #E8F1F5;
+    border: 1px solid #E8F1F5;
     appearance: none;
   }
   .check:checked + .task {
@@ -91,3 +94,6 @@ i{
  p{
   color: transparent;
  }
+ input[type=text]{
+  border: 1px solid #40826D ;
+}
