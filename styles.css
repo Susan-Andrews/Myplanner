@@ -22,6 +22,7 @@
     transition: all 500ms ease-out;
     color:var(--text-color);
 }
+
 #icon{
    
    cursor: pointer;
@@ -96,4 +97,12 @@ i{
  }
  input[type=text]{
   border: 1px solid #40826D ;
+}
+@media (min-width:90%) {
+  header #contentvp .task li{
+    width:50%;
+    height: auto;
+    padding: 5px;
+    margin: auto;
+  }
 }

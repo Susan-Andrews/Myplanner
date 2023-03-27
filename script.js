@@ -34,32 +34,6 @@ function loadtasks(){
     
   });
 }
-let list=document.querySelector("ul");
-//function-adding new task
-function addtask() {
-  let task=document.querySelector("form input");
-  let list=document.querySelector("ul");
-  let content=document.querySelector("delcontent")
-  if(task.value === "") {
-    alert("Please add some task!");
-    return false;
-  }
-  // task already exist
-  if (document.querySelector(`input[value="${task.value}"]`)) {
-    alert("Task already exist!");
-    return false;
-  }
-  localStorage.setItem("tasks" , JSON.stringify([...JSON.parse(localStorage.getItem("tasks") || "[]") , {task:task.value ,completed:false}]));
-
-  let li=document.createElement("li");
-  li.innerHTML = `<div id="mytodo" class=" col-sm gap-auto p-7"><input type="checkbox" onclick="taskcomplete(this)" class="check">
-      <input type="text" size="90" value="${task.value}" class="task" onfocus="getcurrenttask(this)" onblur="edittask(this)">
-      <i class="fa fa-trash" onclick="removetask(this)"></i> </div>`;
-  list.insertBefore(li,list.children[0]);
-  task.value="" 
-  
-}
-
 //function-completed task
 function taskcomplete(event) {
   let tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
@@ -136,11 +110,36 @@ jQuery(document).ready(function() {
 
 //function to delete all the todos
 function deleteall(elementID) {
-  localStorage.clear();
+  
   var div = document.getElementById(elementID);
-    
+  localStorage.clear();
   while(div.firstChild) {
       div.removeChild(div.firstChild);
   }
+  
+}
+
+//function-adding new task
+function addtask() {
+  let task=document.querySelector("form input");
+  let list=document.querySelector("ul");
+
+  if(task.value === "") {
+    alert("Please add some task!");
+    return false;
+  }
+  // task already exist
+  if (document.querySelector(`input[value="${task.value}"]`)) {
+    alert("Task already exist!");
+    return false;
+  }
+  localStorage.setItem("tasks" , JSON.stringify([...JSON.parse(localStorage.getItem("tasks") || "[]") , {task:task.value ,completed:false}]));
+
+  let li=document.createElement("li");
+  li.innerHTML = `<div id="mytodo" class=" col-sm gap-auto p-7"><input type="checkbox" onclick="taskcomplete(this)" class="check">
+      <input type="text" size="90" value="${task.value}" class="task" onfocus="getcurrenttask(this)" onblur="edittask(this)">
+      <i class="fa fa-trash" onclick="removetask(this)"></i> </div>`;
+   list.insertBefore(li,list.children[0]);
+  task.value="" 
   
 }
