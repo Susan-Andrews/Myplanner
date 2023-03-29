@@ -106,3 +106,8 @@ i{
     margin: auto;
   }
 }
+@media only screen and (max-width:600px){
+  #header {
+    grid-template-columns:1fr;
+  }
+}
