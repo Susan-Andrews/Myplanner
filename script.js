@@ -26,12 +26,11 @@ function loadtasks(){
   tasks.forEach(task => {
     const list=document.querySelector("ul");
     const li=document.createElement("li");
-    li.innerHTML= `<div  id="mytodo" class=" col-sm gap-auto p-7">
-    <input type="checkbox" onclick=taskcomplete(this)" class="check"  ${task.completed ? "checked" : ""}>
-    <input type="text" size="90" value="${task.task}" class="task ${task.completed ? "completed" : "" } " onfocus=getcurrenttask(this) " onblur="edittask(this)">
-    <i class=fa fa-trash" onclick=removetask(this)"></li></div> `;
+    li.innerHTML= `<div  id="mytodo" class="col-sm gap-auto p-7">
+    <input type="checkbox" onclick=taskcomplete(this) class="check">
+    <input type="text" size="90" value="${task.task}" class="task ${task.completed ? "completed" : "" }" onfocus=getcurrenttask(this) onblur=edittask(this)>
+    <i class="fa fa-trash mt-2" onclick=removetask(this)></i></div> `;
     list.insertBefore(li,list.children[0]);  
-    
   });
 }
 //function-completed task
@@ -56,7 +55,7 @@ function removetask(event) {
     }
   });
   localStorage.setItem("tasks", JSON.stringify(tasks));
-  event.parentElement.remove();  //removes value
+  event.parentElement.parentElement.remove();  //removes value
 }
 
 var currenttask=null;
@@ -116,14 +115,13 @@ function deleteall(elementID) {
   while(div.firstChild) {
       div.removeChild(div.firstChild);
   }
-  
 }
 
 //function-adding new task
 function addtask() {
   let task=document.querySelector("form input");
   let list=document.querySelector("ul");
-
+  console.log(list)
   if(task.value === "") {
     alert("Please add some task!");
     return false;
@@ -138,7 +136,7 @@ function addtask() {
   let li=document.createElement("li");
   li.innerHTML = `<div id="mytodo" class=" col-sm gap-auto p-7"><input type="checkbox" onclick="taskcomplete(this)" class="check">
       <input type="text" size="90" value="${task.value}" class="task" onfocus="getcurrenttask(this)" onblur="edittask(this)">
-      <i class="fa fa-trash" onclick="removetask(this)"></i> </div>`;
+      <i class="fa fa-trash mt-2" onclick="removetask(this)"></i> </div>`;
    list.insertBefore(li,list.children[0]);
   task.value="" 
   
