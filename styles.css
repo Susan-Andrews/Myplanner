@@ -134,4 +134,8 @@ i{
   input{
     width:100%;
   }
+  #heading1,
+  #heading2{
+    font-size:x-large;
+  }
 }
