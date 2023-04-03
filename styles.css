@@ -4,6 +4,7 @@
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   
 }
+
 :root{
     --background-color:#E8F1F5;
     --text-color:#181823;
@@ -22,15 +23,27 @@
     transition: all 500ms ease-out;
     color:var(--text-color);
 }
-
+.container{
+  width: 100%;
+}
 #icon{
-   
+   margin: 30px;
    cursor: pointer;
    width: 30px;
 } 
 #add , #download-btn , #delete-all{
     border: none;
+    
     background-color: #40826D !important;
+}
+.inputdiv{
+  width: 65%;
+  display: inline-block;
+}
+
+.buttondiv{
+  width: 30%;
+  display: inline-block;
 }
 ul{
     list-style:none;
@@ -98,16 +111,27 @@ i{
  input[type=text]{
   border: 1px solid #40826D ;
 }
-@media (min-width:90%) {
-  header #contentvp .task li{
-    width:50%;
-    height: auto;
-    padding: 5px;
-    margin: auto;
+
+@media screen and (max-width: 460px) {
+  
+  .inputdiv,
+  .buttondiv {
+      width: 100%;
   }
-}
-@media only screen and (max-width:600px){
-  #header {
-    grid-template-columns:1fr;
+  .buttondiv{
+    margin-top:6px;
+    gap: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #icon{
+   width: 18px;
+  }
+  .contentdiv{
+    width: 100%;
+  }
+  input{
+    width:100%;
   }
 }

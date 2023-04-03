@@ -28,7 +28,7 @@ function loadtasks(){
     const li=document.createElement("li");
     li.innerHTML= `<div  id="mytodo" class="col-sm gap-auto p-7">
     <input type="checkbox" onclick=taskcomplete(this) class="check">
-    <input type="text" size="90" value="${task.task}" class="task ${task.completed ? "completed" : "" }" onfocus=getcurrenttask(this) onblur=edittask(this)>
+    <input type="text" size="70" value="${task.task}" class="task ${task.completed ? "completed" : "" }" onfocus=getcurrenttask(this) onblur=edittask(this)>
     <i class="fa fa-trash mt-2" onclick=removetask(this)></i></div> `;
     list.insertBefore(li,list.children[0]);  
   });

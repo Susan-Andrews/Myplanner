@@ -15,7 +15,7 @@
 <body id="header">
     <main class="container py-5 p-md-5 position-relative ">
         
-            <img class="position-relative top-0 start-100" src="src/moon.png" id='icon'>
+            <img  src="src/moon.png" id='icon'>
             <h1 class="text-center my-4">To Do List</h1>
     
             <!-- Bootstrap CSS -->
@@ -29,31 +29,35 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
             <form class="fw-semibold fs-5" id="contents">
-                <div class=" d-flex flex-row  p-5 gap-3 my-3">
-                        <!-- input task -->
-                        <div class="col">
-                            <input type="text" id="title"  class="form-control" placeholder="Add task"  required>
-                        </div>
-                        <!-- add button -->
-                        <div class="btn-group">
-                            <button type="submit"  id="add" class="badge text-bg-primary">Add Task</button>
-                        </div>
-                        <!-- download button -->
-                        <div class="btn-group">
-                            <button type="button"  id="download-btn" class="badge text-bg-primary" onclick="window.print()">Download Planner</button>
-                        </div>
-                        <!-- submit button -->
-                        <div class="btn-group">
-                            <button type="button"  id="delete-all"  class="badge text-bg-primary" onclick="deleteall('delcontent')"> Delete All</button>
-                        </div>
-                </div>      
+            <!-- <div class="d-inline">     -->
+                <div class="inputdiv">
+                    <!-- input task -->
+                    <div class="col">
+                        <input type="text" id="title"  class="form-control" placeholder="Add task"  required>
+                    </div>
+                </div>
+                <div class="buttondiv">   
+                    <!-- add button -->
+                    <div class="btn-group">
+                        <button type="submit"  id="add" class="badge text-bg-primary">Add Task</button>
+                    </div>
+                    <!-- download button -->
+                    <div class="btn-group">
+                        <button type="button"  id="download-btn" class="badge text-bg-primary" onclick="window.print()">Download Planner</button>
+                    </div>
+                    <!-- submit button -->
+                    <div class="btn-group">
+                        <button type="button"  id="delete-all"  class="badge text-bg-primary" onclick="deleteall('delcontent')"> Delete All</button>
+                </div>        
+            <!-- </div>         -->
+            </div>           
             </form>  
         
             <section >
                 <div id="contentvp">
                     <div id="mytodo">
                         <h2 class="text-center " >Your To Do's!</h2>
-                            <div>
+                            <div class="contentdiv">
                                     <ul id="delcontent"></ul>
                                     <div>
                                     <p class="text-center" >-</p>
