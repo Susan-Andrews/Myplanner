@@ -28,7 +28,7 @@ function loadtasks(){
     const li=document.createElement("li");
     li.innerHTML= `<div  id="mytodo" class="col-sm gap-auto p-7">
     <input type="checkbox" onclick=taskcomplete(this) class="check">
-    <input type="text" size="70" value="${task.task}" class="task ${task.completed ? "completed" : "" }" onfocus=getcurrenttask(this) onblur=edittask(this)>
+    <input type="text" size="90" value="${task.task}" class="task ${task.completed ? "completed" : "" }" onfocus=getcurrenttask(this) onblur=edittask(this)>
     <i class="fa fa-trash mt-2" onclick=removetask(this)></i></div> `;
     list.insertBefore(li,list.children[0]);  
   });
@@ -92,19 +92,19 @@ function edittask(event){
 }
 
 // download your planner
-window.jsPDF = window.jspdf.jsPDF;
-jQuery(document).ready(function() {
-  $('#download-btn').click(function(){
-    html2canvas(document.querySelector('#mytodo')).then((canvas) => {
-      let img=canvas.toDataURL('image/png');
-      // console.log(img);
+// window.jsPDF = window.jspdf.jsPDF;
+// jQuery(document).ready(function() {
+//   $('#download-btn').click(function(){
+//     html2canvas(document.querySelector('#mytodo')).then((canvas) => {
+//       let img=canvas.toDataURL('image/png');
+//       // console.log(img);
 
-      let pdf=new jsPDF('p', 'px' , [1600,1131]);
-      pdf.addImage(img,'PNG',20,20,690,550);
-      pdf.save("planner.pdf");
-    });
-  });
-});
+//       let pdf=new jsPDF('p', 'px' , [1600,1131]);
+//       pdf.addImage(img,'PNG',20,20,690,550);
+//       pdf.save("planner.pdf");
+//     });
+//   });
+// });
 
 
 //function to delete all the todos
