@@ -31,6 +31,7 @@
    cursor: pointer;
    width: 20px;
 } 
+
 #add , #download-btn , #delete-all{
     border: none;
     
@@ -42,6 +43,7 @@
 }
 
 .buttondiv{
+  padding: 50px;
   width: 30%;
   display: inline-block;
 }
