@@ -1,80 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyPlanner</title>
-    <!-- favicon -->
-    <link rel="shortcut icon" href="src/myplanner.png" type="x-icon">
-    <!-- local files  -->
+    <!-- Favicon -->
+    <link rel="icon" href="src/favicon.ico" type="image/x-icon">
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css">
-    <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" defer></script>
+    <!-- JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" defer></script>
+    <!-- Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-
 </head>
 <body id="header">
-    <main class="container py-5 p-md-5 position-relative ">
-        
-            <img  src="src/moon.png" id='icon'>
-            <h1 class="text-center my-4" id="heading1">To Do List</h1>
+    <header class="container py-5 p-md-5 position-relative text-center">
+        <img src="src/moon.png" alt="MyPlanner Logo" id="icon">
+        <h1 class="my-4" id="heading1">To Do List</h1>
+    </header>
     
-            <!-- Bootstrap CSS -->
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-            <!-- jspdf -->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-            <!-- html2canvas -->
-            <script src="//cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-            <!-- icons -->
-            <link rel="icon" type="image/x-icon" href="src/favicon.ico" />
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-            <form class="fw-semibold fs-5 ml-5" id="contents">
-            <!-- <div class="d-inline">     -->
-                <div class="inputdiv">
-                    <!-- input task -->
-                    <div class="col">
-                        <input type="text" id="title"  class="form-control" placeholder="Add task"  required>
+    <main class="container py-3">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form id="task-form" class="fw-semibold fs-5">
+                    <div class="input-group mb-3">
+                        <input type="text" id="title" class="form-control" placeholder="Add a new task" required>
+                        <button type="submit" class="btn btn-primary">Add</button>
                     </div>
-                </div>
-                <div class="buttondiv">   
-                    <!-- add button -->
-                    <div class="btn-group">
-                        <button type="submit"  id="add" class="badge text-bg-primary">Add Task</button>
-                    </div>
-                    <!-- download button -->
-                    <!-- <div class="btn-group">
-                        <button type="button"  id="download-btn" class="badge text-bg-primary" onclick="window.print()">Download Planner</button>
-                    </div> -->
-                    <!-- submit button -->
-                    <div class="btn-group">
-                        <button type="button"  id="delete-all"  class="badge text-bg-primary" onclick="deleteall('delcontent')"> Delete All</button>
-                </div>        
-            <!-- </div>         -->
-            </div>           
-            </form>  
-        
-            <section >
-                <div id="contentvp">
-                    <div id="mytodo">
-                        <h2 class="text-center "  id="heading2">Your To Do's!</h2>
-                            <div class="contentdiv">
-                                    <ul id="delcontent"></ul>
-                                    <div>
-                                    <p class="text-center" >-</p>
-                                    </div>
-                            </div>
-                    </div>
-                </div>      
-            </section>
-            <footer>
-            <div class="text-center"> 
-                <p2 >@annu23</p2>
+                </form>
             </div>
-            </footer>
-            
-
+        </div>
+        
+        <section>
+            <h2 class="text-center my-4" id="heading2">Your To Do's</h2>
+            <div id="no-tasks-message" class="text-center mt-3 mb-3">
+                <!-- Message to display when there are no tasks -->
+                No tasks found. Add tasks using the form above.
+            </div>
+            <ul id="task-list" class="list-group">
+                <!-- Tasks will be dynamically added here -->
+            </ul>
+            <div class="text-center mt-5">
+                <button id="delete-all" class="btn btn-danger">Delete All</button>
+            </div>
+        </section>
     </main>
+    
+    <footer class="text-center py-4">
+        <p>&copy; 2023 Susan Andrews</p>
+    </footer>
+    
     <script src="script.js" defer></script>
 </body>
+</html>
