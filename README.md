@@ -50,7 +50,3 @@ If you'd like to contribute to this project, please feel free to fork the reposi
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-Please note that this README is a basic template generated based on the provided information. You can further enhance and customize it to suit your specific project needs, such as adding more detailed instructions, screenshots, or additional sections as necessary.
