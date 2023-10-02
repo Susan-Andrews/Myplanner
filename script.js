@@ -1,143 +1,218 @@
-
-//Dark theme 
-var icon=document.getElementById('icon');
-icon.onclick=function(){
+// Dark theme toggle
+var icon = document.getElementById('icon');
+icon.onclick = function () {
     document.body.classList.toggle("dark-theme");
-    if(document.body.classList.contains("dark-theme")){
-      icon.src="src/sunn.png";
-    }
-    else{
-        icon.src="src/moon.png";   
-    }
-} 
+    icon.src = document.body.classList.contains("dark-theme") ? "src/sunn.png" : "src/moon.png";
+}
 
-//On app load ,gets all the tasks from local storage
-window.onload=loadtasks();
-//On form submit,adds task
-document.querySelector("form").addEventListener("submit", e => {
-  e.preventDefault();
-  addtask();
+// On app load, retrieve tasks from local storage
+window.onload = loadTasks();
+
+// Get references to form elements
+var taskForm = document.getElementById("task-form");
+var taskInput = document.getElementById("title");
+
+// Add event listener for form submission
+taskForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    addTask();
 });
 
-//function -loading the task
-function loadtasks(){
-  if (localStorage.getItem("tasks") == null) return;
-  let tasks=Array.from(JSON.parse(localStorage.getItem("tasks")));
-  tasks.forEach(task => {
-    const list=document.querySelector("ul");
-    const li=document.createElement("li");
-    li.innerHTML= `<div  id="mytodo" class="col-sm gap-auto p-7">
-    <input type="checkbox" onclick=taskcomplete(this) class="check">
-    <input type="text" size="90" value="${task.task}" class="task ${task.completed ? "completed" : "" }" onfocus=getcurrenttask(this) onblur=edittask(this)>
-    <i class="fa fa-trash mt-2" onclick=removetask(this)></i></div> `;
-    list.insertBefore(li,list.children[0]);  
-  });
-}
-//function-completed task
-function taskcomplete(event) {
-  let tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
-  tasks.forEach(task => {
-    if (task.task === event.nextElementSibling.value) {
-      task.completed = !task.completed;
+// Load tasks from local storage and populate the list
+function loadTasks() {
+    var tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    var list = document.getElementById("task-list");
+    var noTasksMessage = document.getElementById("no-tasks-message");
+
+    if (tasks.length === 0) {
+        // Display a message when there are no tasks
+        noTasksMessage.textContent = "No tasks found. Add tasks using the form above.";
+    } else {
+        // Hide the message when tasks are present
+        noTasksMessage.textContent = "";
     }
-  });
-  localStorage.setItem("tasks", JSON.stringify(tasks));
-  event.nextElementSibling.classList.toggle("completed");
+
+    list.innerHTML = ""; // Clear the existing task list
+
+    tasks.forEach(function (task) {
+        var listItem = createTaskListItem(task.task, task.completed);
+        list.appendChild(listItem);
+    });
 }
 
-//function-removing the task
-function removetask(event) {
-  let tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
-  tasks.forEach(task => {
-    if (task.task === event.parentNode.children[1].value) {
-      // delete task
-      tasks.splice(tasks.indexOf(task), 1);
+// Create a new task list item
+function createTaskListItem(taskText, completed) {
+    var listItem = document.createElement("li");
+    listItem.className = "list-group-item";
+
+    var taskDiv = document.createElement("div");
+    taskDiv.className = "d-flex justify-content-between align-items-center";
+
+    var taskCheckbox = document.createElement("input");
+    taskCheckbox.type = "checkbox";
+    taskCheckbox.className = "form-check-input";
+    taskCheckbox.checked = completed;
+    taskCheckbox.addEventListener("change", function () {
+        taskComplete(this);
+    });
+
+    var taskLabel = document.createElement("label");
+    taskLabel.className = "form-check-label";
+    taskLabel.contentEditable = true;
+    taskLabel.textContent = taskText;
+    taskLabel.addEventListener("blur", function () {
+        editTask(this);
+    });
+
+    var deleteButton = document.createElement("button");
+    deleteButton.type = "button";
+    deleteButton.className = "btn btn-danger btn-sm";
+    deleteButton.innerHTML = '<i class="bi bi-trash"></i>';
+    deleteButton.addEventListener("click", function () {
+        removeTask(this);
+    });
+
+    taskDiv.appendChild(taskCheckbox);
+    taskDiv.appendChild(taskLabel);
+    taskDiv.appendChild(deleteButton);
+
+    listItem.appendChild(taskDiv);
+
+    return listItem;
+}
+
+// Mark a task as complete
+function taskComplete(checkbox) {
+    var listItem = checkbox.closest("li");
+    var tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+    tasks.forEach(function (task) {
+        if (task.task === listItem.querySelector("label").textContent) {
+            task.completed = checkbox.checked;
+        }
+    });
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    listItem.classList.toggle("completed", checkbox.checked);
+}
+
+// Function to delete a task
+function removeTask(button) {
+    var listItem = button.closest("li");
+    var taskText = listItem.querySelector("label").textContent;
+    var tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+    tasks = tasks.filter(function (task) {
+        return task.task !== taskText;
+    });
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    listItem.remove();
+
+    // Update the message display
+    loadTasks();
+}
+
+// Edit a task
+function editTask(label) {
+    var listItem = label.closest("li");
+    var taskText = label.textContent.trim();
+    var tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+    if (taskText === "") {
+        alert("Task is empty!");
+        label.textContent = currentTask;
+        return;
     }
-  });
-  localStorage.setItem("tasks", JSON.stringify(tasks));
-  event.parentElement.parentElement.remove();  //removes value
-}
 
-var currenttask=null;
-//function-retrieving the task
-function getcurrenttask(event) {
-  currenttask=event.value
-}
+    // Check for duplicate task
+    var isDuplicate = tasks.some(function (task) {
+        return task.task === taskText;
+    });
 
-//function-editing a task
-function edittask(event){
-  let tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
-  if (event.value === "") {
-    alert("Task is empty!");
-    event.value = currenttask;
-    return;
-  }
-  // task already exist
-  tasks.forEach(task => {
-    if (task.task === event.value) {
-      alert("Task already exist!");
-      event.value = currenttask;
-      return;
+    if (isDuplicate) {
+        alert("Task already exists!");
+        label.textContent = currentTask;
+        return;
     }
-  });
-  // update task
-  tasks.forEach(task => {
-    if (task.task === currenttask) {
-      task.task = event.value;
+
+    tasks.forEach(function (task) {
+        if (task.task === currentTask) {
+            task.task = taskText;
+        }
+    });
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+// Function to delete all tasks
+document.getElementById("delete-all").addEventListener("click", function () {
+    var taskList = document.getElementById("task-list");
+    taskList.innerHTML = ""; // Clear the task list
+
+    localStorage.removeItem("tasks"); // Remove all tasks from local storage
+    loadTasks();
+});
+
+// Initialize the current task variable
+var currentTask = null;
+
+// Function to get the current task being edited
+function getcurrenttask(input) {
+    currentTask = input.textContent.trim();
+}
+
+// Function to add a new task
+function addTask() {
+    let taskInput = document.getElementById("title");
+    let taskText = taskInput.value.trim();
+    let taskList = document.getElementById("task-list");
+
+    if (taskText === "") {
+        alert("Please add a task!");
+        return;
     }
-  });
-  // update local storage
-  localStorage.setItem("tasks", JSON.stringify(tasks));
 
+    // Check for duplicate task
+    if (isTaskDuplicate(taskText)) {
+        alert("Task already exists!");
+        return;
+    }
+
+    // Create a new task list item
+    let listItem = createTaskListItem(taskText, false);
+    taskList.appendChild(listItem);
+
+    // Clear the input field
+    taskInput.value = "";
+
+    // Save the updated tasks to local storage
+    saveTasksToLocalStorage();
+
+    // Update the message display
+    loadTasks();
 }
 
-// download your planner
-// window.jsPDF = window.jspdf.jsPDF;
-// jQuery(document).ready(function() {
-//   $('#download-btn').click(function(){
-//     html2canvas(document.querySelector('#mytodo')).then((canvas) => {
-//       let img=canvas.toDataURL('image/png');
-//       // console.log(img);
+// Function to check if a task is a duplicate
+function isTaskDuplicate(taskText) {
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-//       let pdf=new jsPDF('p', 'px' , [1600,1131]);
-//       pdf.addImage(img,'PNG',20,20,690,550);
-//       pdf.save("planner.pdf");
-//     });
-//   });
-// });
-
-
-//function to delete all the todos
-function deleteall(elementID) {
-  
-  var div = document.getElementById(elementID);
-  localStorage.clear();
-  while(div.firstChild) {
-      div.removeChild(div.firstChild);
-  }
+    return tasks.some(function (task) {
+        return task.task === taskText;
+    });
 }
 
-//function-adding new task
-function addtask() {
-  let task=document.querySelector("form input");
-  let list=document.querySelector("ul");
-  console.log(list)
-  if(task.value === "") {
-    alert("Please add some task!");
-    return false;
-  }
-  // task already exist
-  if (document.querySelector(`input[value="${task.value}"]`)) {
-    alert("Task already exist!");
-    return false;
-  }
-  localStorage.setItem("tasks" , JSON.stringify([...JSON.parse(localStorage.getItem("tasks") || "[]") , {task:task.value ,completed:false}]));
+// Function to save tasks to local storage
+function saveTasksToLocalStorage() {
+    let tasks = [];
+    let taskList = document.getElementById("task-list");
 
-  let li=document.createElement("li");
-  li.innerHTML = `<div id="mytodo" class=" col-sm gap-auto p-7"><input type="checkbox" onclick="taskcomplete(this)" class="check">
-      <input type="text" size="90" value="${task.value}" class="task" onfocus="getcurrenttask(this)" onblur="edittask(this)">
-      <i class="fa fa-trash mt-2" onclick="removetask(this)"></i> </div>`;
-   list.insertBefore(li,list.children[0]);
-  task.value="" 
-  
+    taskList.querySelectorAll(".list-group-item").forEach(function (item) {
+        let taskText = item.querySelector("label").textContent;
+        let completed = item.querySelector("input[type='checkbox']").checked;
+
+        tasks.push({ task: taskText, completed: completed });
+    });
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
 }
